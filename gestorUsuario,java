@@ -8,7 +8,29 @@ public class GestorUsuarios {
     private static final String FILE_PATH = "usuarios.json";
     private static final Gson gson = new Gson();
 
+
+    public static Usuario login(String nombre, String password) {
+        List<Usuario> usuarios = cargarUsuarios();
+        for (Usuario u : usuarios) {
+            if (u.getNombre().equals(nombre) && u.getPassword().equals(password)) {
+                return u;
+            }
+        }
+        return null;
+    }
+
+    public static Usuario registrar(String nombre, String password) {
+        List<Usuario> usuarios = cargarUsuarios();
+        int nuevoId = usuarios.size() + 1;
+        Usuario nuevo = new Usuario(nuevoId, nombre, password);
+        usuarios.add(nuevo);
+        guardarUsuarios(usuarios);
+        return nuevo;
+    }    
 }
+
+
+
 
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
@@ -20,9 +42,7 @@ public class GestorCanciones {
     private static final String FILE_PATH = "canciones.json";
     private static final Gson gson = new Gson();
 
-}
-
-    public static List<Usuario> cargarUsuarios() {
+  public static List<Usuario> cargarUsuarios() {
         try (Reader reader = new FileReader(FILE_PATH)) {
             return gson.fromJson(reader, new TypeToken<List<Usuario>>(){}.getType());
         } catch (IOException e) {
@@ -36,4 +56,7 @@ public class GestorCanciones {
         } catch (IOException e) {
             System.out.println("Error guardando usuarios: " + e.getMessage());
         }
-    }
+    }    
+}
+
+  

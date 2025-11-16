@@ -25,4 +25,6 @@ public class usuario {
     public String getPassword() {
         return password;
     }
+
+    
 }
