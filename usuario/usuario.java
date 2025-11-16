@@ -1,16 +1,9 @@
-package pro_cancion.usuario;
-public class usuario {
-public static void main(String[] args) {
-    // Aquí puedes agregar el código que deseas ejecutar en el método main
-}
-
-public class usuario {
+public class Usuario {
     private int id;
     private String nombre;
     private String password;
-    
 
-    public usuario(int id, String nombre, String password) {
+    public Usuario(int id, String nombre, String password) {
         this.id = id;
         this.nombre = nombre;
         this.password = password;
@@ -27,8 +20,5 @@ public class usuario {
     public String getPassword() {
         return password;
     }
-
-    
-}
 }
 

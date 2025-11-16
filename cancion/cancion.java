@@ -1,10 +1,10 @@
-public class cancion {
+public class Cancion {
     private int id;
     private int userId;  // Clavee
     private String titulo;
     private String artista;
 
-    public cancion(int id, int userId, String titulo, String artista) {
+    public Cancion(int id, int userId, String titulo, String artista) {
         this.id = id;
         this.userId = userId;
         this.titulo = titulo;
