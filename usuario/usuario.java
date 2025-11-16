@@ -1,6 +1,5 @@
-// En Usuario.java
-
-
+package pro_cancion.usuario;
+public class usuario {
 public static void main(String[] args) {
     // Aquí puedes agregar el código que deseas ejecutar en el método main
 }
@@ -31,3 +30,5 @@ public class usuario {
 
     
 }
+}
+
