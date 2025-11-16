@@ -1,12 +1,14 @@
+package pro_cancion.gestorUsuario;
+
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
 import java.io.*;
 import java.util.*;
+import pro_cancion.cancion.Cancion;
 
 public class GestorCanciones {
     private static final String FILE_PATH = "canciones.json";
     private static final Gson gson = new Gson();
-
     public static List<Cancion> cargarCanciones() {
         try (Reader reader = new FileReader(FILE_PATH)) {
             return gson.fromJson(reader, new TypeToken<List<Cancion>>(){}.getType());
@@ -14,7 +16,6 @@ public class GestorCanciones {
             return new ArrayList<>();
         }
     }
-
     public static void guardarCanciones(List<Cancion> canciones) {
         try (Writer writer = new FileWriter(FILE_PATH)) {
             gson.toJson(canciones, writer);
@@ -22,7 +23,6 @@ public class GestorCanciones {
             System.out.println("Error guardando canciones: " + e.getMessage());
         }
     }
-
     public static List<Cancion> obtenerCancionesDeUsuario(int userId) {
         List<Cancion> todas = cargarCanciones();
         List<Cancion> propias = new ArrayList<>();
@@ -33,7 +33,6 @@ public class GestorCanciones {
         }
         return propias;
     }
-
     public static void agregarCancion(int userId, String titulo, String artista) {
         List<Cancion> canciones = cargarCanciones();
         int nuevoId = canciones.size() + 1;
@@ -41,14 +40,12 @@ public class GestorCanciones {
         canciones.add(nueva);
         guardarCanciones(canciones);
     }
-
     public static boolean eliminarCancion(int userId, int cancionId) {
         List<Cancion> canciones = cargarCanciones();
         boolean eliminada = canciones.removeIf(c -> c.getId() == cancionId && c.getUserId() == userId);
         if (eliminada) guardarCanciones(canciones);
         return eliminada;
     }
-
     public static boolean editarCancion(int userId, int cancionId, String nuevoTitulo, String nuevoArtista) {
         List<Cancion> canciones = cargarCanciones();
         for (Cancion c : canciones) {

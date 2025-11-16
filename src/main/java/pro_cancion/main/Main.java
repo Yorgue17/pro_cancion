@@ -1,19 +1,20 @@
-
+package pro_cancion.main;
 
 import java.util.*;
-// Si las clases no están en paquetes, no se requieren imports adicionales
+import pro_cancion.usuario.Usuario;
+import pro_cancion.cancion.Cancion;
+import pro_cancion.gestorUsuario.GestorUsuarios;
+import pro_cancion.gestorUsuario.GestorCanciones;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Usuario usuarioActual = null;
-
         System.out.println("🎶 Bienvenido al Sistema de Canciones 🎶");
         System.out.println("1. Login");
         System.out.println("2. Registrar");
         System.out.print("Seleccione opción: ");
         int opcion = sc.nextInt(); sc.nextLine();
-
         if (opcion == 1) {
             System.out.print("Usuario: ");
             String nombre = sc.nextLine();
@@ -32,7 +33,6 @@ public class Main {
             usuarioActual = GestorUsuarios.registrar(nombre, pass);
             System.out.println("✅ Usuario registrado con éxito.");
         }
-
         if (usuarioActual != null) {
             System.out.println("\n👋 Bienvenido, " + usuarioActual.getNombre());
             while (true) {
@@ -44,7 +44,6 @@ public class Main {
                 System.out.println("5. Salir");
                 System.out.print("Seleccione opción: ");
                 int op = sc.nextInt(); sc.nextLine();
-
                 if (op == 1) {
                     List<Cancion> canciones = GestorCanciones.obtenerCancionesDeUsuario(usuarioActual.getId());
                     if (canciones.isEmpty()) {
@@ -81,4 +80,3 @@ public class Main {
         }
     }
 }
-

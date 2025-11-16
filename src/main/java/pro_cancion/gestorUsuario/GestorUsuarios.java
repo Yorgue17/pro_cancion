@@ -4,16 +4,18 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
 import java.io.*;
 import java.util.*;
+import pro_cancion.usuario.Usuario;
 
 public class GestorUsuarios {
     private static final String FILE_PATH = "usuarios.json";
     private static final Gson gson = new Gson();
-}
+    public static List<Usuario> cargarUsuarios() {
+        try (Reader reader = new FileReader(FILE_PATH)) {
+            return gson.fromJson(reader, new TypeToken<List<Usuario>>(){}.getType());
         } catch (IOException e) {
             return new ArrayList<>();
         }
     }
-
     public static void guardarUsuarios(List<Usuario> usuarios) {
         try (Writer writer = new FileWriter(FILE_PATH)) {
             gson.toJson(usuarios, writer);
@@ -21,7 +23,6 @@ public class GestorUsuarios {
             System.out.println("Error guardando usuarios: " + e.getMessage());
         }
     }
-
     public static Usuario login(String nombre, String password) {
         List<Usuario> usuarios = cargarUsuarios();
         for (Usuario u : usuarios) {
@@ -31,7 +32,6 @@ public class GestorUsuarios {
         }
         return null;
     }
-
     public static Usuario registrar(String nombre, String password) {
         List<Usuario> usuarios = cargarUsuarios();
         int nuevoId = usuarios.size() + 1;
@@ -41,10 +41,3 @@ public class GestorUsuarios {
         return nuevo;
     }
 }
-
-
-  
-package pro_cancion.gestorUsuario;
-
-
-
